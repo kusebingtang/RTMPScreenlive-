@@ -89,8 +89,8 @@ public class VideoCodec extends Thread {
                     // 微妙转为毫秒
                     startTime = bufferInfo.presentationTimeUs / 1000;
                 }
-                writeContent(outData);
-                writeBytes(outData);
+//                writeContent(outData);
+//                writeBytes(outData);
 //                包含   分隔符
 //                RTMPPackage rtmpPackage = new RTMPPackage(outData, (bufferInfo.presentationTimeUs / 1000) - startTime);
 //                rtmpPackage.setType(RTMPPackage.RTMP_PACKET_TYPE_VIDEO);

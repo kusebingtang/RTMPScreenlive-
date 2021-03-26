@@ -17,9 +17,6 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("native-lib");
-    }
 
     String url = "rtmp://192.168.10.224/live/livestream";
 
