@@ -78,7 +78,7 @@ public class VideoCodec extends Thread {
                 timeStamp = System.currentTimeMillis();
             }
             int index = mediaCodec.dequeueOutputBuffer(bufferInfo, 100000);
-            Log.i(TAG, "run: " + index);
+            Log.i(TAG, "VideoCodec run: " + index);
             if (index >= 0) {
                 ByteBuffer buffer = mediaCodec.getOutputBuffer(index);
                 MediaFormat mediaFormat = mediaCodec.getOutputFormat(index);
@@ -92,9 +92,9 @@ public class VideoCodec extends Thread {
 //                writeContent(outData);
 //                writeBytes(outData);
 //                包含   分隔符
-//                RTMPPackage rtmpPackage = new RTMPPackage(outData, (bufferInfo.presentationTimeUs / 1000) - startTime);
-//                rtmpPackage.setType(RTMPPackage.RTMP_PACKET_TYPE_VIDEO);
-//                screenLive.addPackage(rtmpPackage);
+                RTMPPackage rtmpPackage = new RTMPPackage(outData, (bufferInfo.presentationTimeUs / 1000) - startTime);
+                rtmpPackage.setType(RTMPPackage.RTMP_PACKET_TYPE_VIDEO);
+                screenLive.addPackage(rtmpPackage);
                 mediaCodec.releaseOutputBuffer(index, false);
             }
         }

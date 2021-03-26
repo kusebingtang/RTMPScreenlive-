@@ -43,8 +43,27 @@ public class ScreenLive extends Thread {
 
         VideoCodec videoCodec = new VideoCodec(this);
         videoCodec.startLive(mediaProjection);
+
+        isLiving = true;
+        while (isLiving) {
+            RTMPPackage rtmpPackage = null;
+            try {
+                rtmpPackage = queue.take();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Log.i(TAG, "取出数据");
+            if (rtmpPackage.getBuffer() != null && rtmpPackage.getBuffer().length != 0) {
+                Log.i(TAG, "ScreenLive run: ----------->推送 " + rtmpPackage.getBuffer().length + "   type:" + rtmpPackage.getType());
+                sendData(rtmpPackage.getBuffer(), rtmpPackage.getBuffer()
+                        .length, rtmpPackage.getTms(), rtmpPackage.getType());
+            }
+        }
     }
 
     //连接RTMP服务器
     private native boolean connect(String url);
+
+    //发送RTMP Data
+    private native boolean sendData(byte[] data, int len, long tms, int type);
 }
