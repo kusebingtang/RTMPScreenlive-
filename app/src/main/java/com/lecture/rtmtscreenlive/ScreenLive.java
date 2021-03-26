@@ -44,6 +44,9 @@ public class ScreenLive extends Thread {
         VideoCodec videoCodec = new VideoCodec(this);
         videoCodec.startLive(mediaProjection);
 
+        AudioCodec audioCodec = new AudioCodec(this);
+        audioCodec.startLive();
+
         isLiving = true;
         while (isLiving) {
             RTMPPackage rtmpPackage = null;
